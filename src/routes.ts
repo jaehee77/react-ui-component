@@ -1,3 +1,5 @@
+import Accordions from './components/accordion';
+
 export const routePaths = [
   '/',
   '/accordion',
@@ -18,21 +20,21 @@ export const routePaths = [
   '/selectBox',
   '/autoComplete',
   '/dnd',
-] as const
-export type ROUTE_PATH = (typeof routePaths)[number]
+] as const;
+export type ROUTE_PATH = (typeof routePaths)[number];
 
 type BaseRoute = {
-  key: ROUTE_PATH
-  link: ROUTE_PATH
-  name: string
-}
+  key: ROUTE_PATH;
+  link: ROUTE_PATH;
+  name: string;
+};
 export type ParentRoute = BaseRoute & {
-  children: ROUTE_PATH[]
-}
+  children: ROUTE_PATH[];
+};
 export type ChildRoute = BaseRoute & {
-  children: ((props: unknown) => JSX.Element) | null
-}
-export type ROUTE = ParentRoute | ChildRoute
+  children: ((props: unknown) => JSX.Element) | null;
+};
+export type ROUTE = ParentRoute | ChildRoute;
 
 export const routes: Record<ROUTE_PATH, ROUTE> = {
   '/': {
@@ -64,7 +66,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: '/accordion',
     link: '/accordion',
     name: '01. 아코디언',
-    children: null,
+    children: Accordions,
   },
   '/tabMenu': {
     key: '/tabMenu',
@@ -126,7 +128,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     name: '11. 모달',
     children: null,
   },
-  '/popover': {
+  '/popover': {    
     key: '/popover',
     link: '/popover',
     name: '12. 팝오버',
@@ -168,8 +170,11 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     name: '18. D&D 리스트',
     children: null,
   },
-}
+};
 
-export const isParentRoute = (route: ROUTE): route is ParentRoute => Array.isArray(route.children)
+export const isParentRoute = (route: ROUTE): route is ParentRoute =>
+  Array.isArray(route.children);
 
-export const gnbRootList = (routes['/'] as ParentRoute).children.map(r => routes[r])
+export const gnbRootList = (routes['/'] as ParentRoute).children.map(
+  (r) => routes[r]
+);
