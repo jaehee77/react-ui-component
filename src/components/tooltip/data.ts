@@ -25,12 +25,6 @@ const data = [
     description:
       'Do ad cupidatat excepteur quis eu mollit eiusmod exercitation duis. Aliqua et tempor adipisicing elit in culpa veniam fugiat adipisicing. ',
   },
-  {
-    id: '67d27b2ffaf1c4c753d80f5d',
-    title: 'Reprehenderit incididunt ea sint veniam nisi magna culpa.',
-    description:
-      'Deserunt do voluptate elit incididunt. Commodo veniam tempor cillum ad officia aute ex non sit nostrud Lorem cillum excepteur ipsum. Fugiat deserunt minim ea amet consectetur ipsum mollit officia cupidatat. ',
-  },
 ];
 
 export default data;

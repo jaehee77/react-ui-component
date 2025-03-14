@@ -28,6 +28,7 @@ const Accordion1 = () => {
 
   const onToggleItem = (id: string) => () => {
     setCurrentId((prev) => (prev === id ? null : id));
+    // prev 값과 id 값을 비교하여, 같은 값이면 null로, 다르면 해당 id로 상태를 변경
   };
 
   return (
@@ -40,7 +41,7 @@ const Accordion1 = () => {
             {...d}
             current={currentId === d.id}
             toggle={onToggleItem(d.id)}
-          />
+          /> // toggle에 onToggleItem 함수가 전달되고, 각 d.id를 기억함
         ))}
       </ul>
     </>

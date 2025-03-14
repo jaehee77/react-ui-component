@@ -1,4 +1,6 @@
 import Accordions from './components/accordion';
+import TabMenus from './components/tabMenu';
+import Tooltips from './components/tooltip';
 
 export const routePaths = [
   '/',
@@ -72,13 +74,13 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: '/tabMenu',
     link: '/tabMenu',
     name: '02. 탭메뉴',
-    children: null,
+    children: TabMenus,
   },
   '/tooltip': {
     key: '/tooltip',
     link: '/tooltip',
     name: '03. 툴팁',
-    children: null,
+    children: Tooltips,
   },
   '/textBox': {
     key: '/textBox',
@@ -128,7 +130,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     name: '11. 모달',
     children: null,
   },
-  '/popover': {    
+  '/popover': {
     key: '/popover',
     link: '/popover',
     name: '12. 팝오버',
