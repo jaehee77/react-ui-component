@@ -1,6 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
 import cx from './cx';
 import data from './data';
+import SingleOpenContextProvider, { useSingleOpen } from './singleOpenContext';
 
 const Tooltip = ({
   id,
@@ -11,28 +12,27 @@ const Tooltip = ({
   title: string;
   description: string;
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, toggle] = useSingleOpen(id);
 
-  const handleToggle = (e: SyntheticEvent) => {
+  const handleClick = (e: SyntheticEvent) => {
     e.stopPropagation();
-    setIsOpen((prev) => !prev);
+
+    toggle((prev) => (prev === id ? null : id));
   };
 
   useEffect(() => {
-    const close = () => setIsOpen(false);
-
+    const close = () => toggle(null);
     if (isOpen) {
-      window.addEventListener('click', close);
+      window.addEventListener('click', close, { once: true });
     }
-
     return () => {
       window.removeEventListener('click', close);
     };
-  }, [isOpen]);
+  }, [isOpen, toggle]);
 
   return (
     <div className={cx('container')}>
-      <button className={cx('trigger')} onClick={handleToggle}>
+      <button className={cx('trigger')} onClick={handleClick}>
         {title}
       </button>
       {isOpen && (
@@ -49,11 +49,13 @@ const Tooltip2 = () => {
   return (
     <>
       <h3>
-        #1. React 미완성 <sub>외부 클릭시 닫힘 처리</sub>
+        #2. React with createContext <sub>하나만 열리도록 개선</sub>
       </h3>
-      {data.map((d) => (
-        <Tooltip {...d} key={d.id} />
-      ))}
+      <SingleOpenContextProvider>
+        {data.map((d) => (
+          <Tooltip {...d} key={d.id} />
+        ))}
+      </SingleOpenContextProvider>
     </>
   );
 };
