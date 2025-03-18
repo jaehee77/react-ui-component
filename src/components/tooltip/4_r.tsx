@@ -1,7 +1,9 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import cx from './cx';
 import data from './data';
 import ViewportContextProvider, { useViewportRect } from './viewportContext';
+
+type Style = Partial<Record<'left' | 'right' | 'top' | 'bottom', number>>;
 
 const Tooltip = ({
   id,
@@ -15,6 +17,8 @@ const Tooltip = ({
   const viewportRect = useViewportRect();
   const wrapperRef = useRef<HTMLDetailsElement>(null);
   const targetRef = useRef<HTMLDivElement>(null);
+
+  const [style, setStyle] = useState<Style>({});
 
   useLayoutEffect(() => {
     if (!wrapperRef.current || !targetRef.current) return;
@@ -31,6 +35,9 @@ const Tooltip = ({
       wrapperRect.right + targetRect.width < viewportRect.width
         ? 'top'
         : 'bottom';
+
+        
+
   }, []);
 
   return (

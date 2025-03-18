@@ -90,3 +90,8 @@ const ViewportContextProvider = ({ children }: { children: ReactNode }) => {
 export default ViewportContextProvider;
 
 export const useViewportRect = () => useContext(ViewportContext);
+
+// 📌 useSyncExternalStore 동작 방식
+// subscribe(callback) → 뷰포트 크기 변경(리사이즈) 또는 스크롤 시 callback 실행
+// getViewportRect() → 현재 뷰포트 정보를 가져옴
+// 변경 감지 후 업데이트 → viewportRect 값이 변경되면 컴포넌트 리렌더링
