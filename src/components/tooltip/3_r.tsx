@@ -15,7 +15,8 @@ const Tooltip = ({
   return (
     <details name="test" className={cx('details')} data-tooltip={id}>
       <summary className={cx('summary')} data-tooltip-summary>
-        {title}
+        <span className={cx('text')}>{title}</span>
+        <span className={cx('icon')}>❓</span>
       </summary>
       <div className={cx('tooltip')} onClick={(e) => e.stopPropagation()}>
         {description}
@@ -28,6 +29,17 @@ const Tooltip3 = () => {
   //
 
   useEffect(() => {
+    const details = document.querySelector('details') as HTMLDetailsElement;
+    const icon = details.querySelector('.icon');
+    const summary = details.querySelector('summary');
+
+    if (!summary) return;
+    summary.addEventListener('click', (e) => {
+      if (e.target !== icon) {
+        e.preventDefault();
+      }
+    });
+
     const closeAllTooltip = (e: Event) => {
       const target = e.target as HTMLElement;
       // console.log(target, target.parentElement);

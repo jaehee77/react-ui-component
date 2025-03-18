@@ -60,6 +60,9 @@
       content: '';
       display: none;
     }
+    .text {
+      pointer-events: none;
+    }
     &::after {
       display: inline-block;
       content: '!';

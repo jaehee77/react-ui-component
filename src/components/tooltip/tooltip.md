@@ -77,10 +77,11 @@ subscribe 함수에서의 역할:
 > 이때 `subscribe` 함수는 외부 상태가 변경될 때마다 호출될 `callback을` 인자로 받습니다.  
 > 예를 들어, `window.addEventListener('storage', callback)` 코드에서,  
 > callback은 storage 이벤트가 발생할 때마다 호출됩니다.
-
 > 하지만 `useSyncExternalStore`에서 `callback`은 단순히 React에 상태 변화가 발생했음을  
 > 알리는 역할을 하기 때문에, `callback` 자체는 상태 변화의 처리를 직접적으로 하지는 않습니다.  
 > 상태를 처리하는 작업은 getSnapshot에서 수행됩니다.
+
+<br>
 
 ---
 
