@@ -1,13 +1,14 @@
 import Accordions from './components/accordion';
 import TabMenus from './components/tabMenu';
 import Tooltips from './components/tooltip';
+import TextareaBoxes from './components/textareaBox';
 
 export const routePaths = [
   '/',
   '/accordion',
   '/tabMenu',
   '/tooltip',
-  '/textBox',
+  '/textareaBox',
   '/lineClamp',
   '/lazyLoading',
   '/infiniteScroll',
@@ -47,7 +48,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
       '/accordion',
       '/tabMenu',
       '/tooltip',
-      '/textBox',
+      '/textareaBox',
       '/lineClamp',
       '/lazyLoading',
       '/infiniteScroll',
@@ -82,11 +83,11 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     name: '03. 툴팁',
     children: Tooltips,
   },
-  '/textBox': {
-    key: '/textBox',
-    link: '/textBox',
+  '/textareaBox': {
+    key: '/textareaBox',
+    link: '/textareaBox',
     name: '04. 반응형 텍스트박스',
-    children: null,
+    children: TextareaBoxes,
   },
   '/lineClamp': {
     key: '/lineClamp',
