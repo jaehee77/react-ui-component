@@ -2,6 +2,9 @@ import Accordions from './components/accordion';
 import TabMenus from './components/tabMenu';
 import Tooltips from './components/tooltip';
 import TextareaBoxes from './components/textareaBox';
+import LineClamps from './components/lineClamp';
+import LazyLoad1 from './components/lazyLoading/1_r';
+import LazyLoading_Vanilla from './components/lazyLoading/2_v';
 
 export const routePaths = [
   '/',
@@ -11,6 +14,8 @@ export const routePaths = [
   '/textareaBox',
   '/lineClamp',
   '/lazyLoading',
+  '/lazyLoading/1_r',
+  '/lazyLoading/2_v',
   '/infiniteScroll',
   '/scrollBox',
   '/scrollSpy',
@@ -93,13 +98,25 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: '/lineClamp',
     link: '/lineClamp',
     name: '05. 여러줄 말줄임',
-    children: null,
+    children: LineClamps,
   },
   '/lazyLoading': {
     key: '/lazyLoading',
-    link: '/lazyLoading',
+    link: '/lazyLoading/1_r',
     name: '06. 지연 로딩',
-    children: null,
+    children: ['/lazyLoading/1_r', '/lazyLoading/2_v'],
+  },
+  '/lazyLoading/1_r': {
+    key: '/lazyLoading/1_r',
+    link: '/lazyLoading/1_r',
+    name: '#1 React',
+    children: LazyLoad1,
+  },
+  '/lazyLoading/2_v': {
+    key: '/lazyLoading/2_v',
+    link: '/lazyLoading/2_v',
+    name: '#2 Vanilla',
+    children: LazyLoading_Vanilla,
   },
   '/infiniteScroll': {
     key: '/infiniteScroll',

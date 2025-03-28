@@ -2,6 +2,7 @@ import cx from './cx';
 import TextBox1 from './1_r';
 import TextBox2 from './2_r';
 import TextBox3 from './3_r';
+import TextBox2_New from './2_r_new';
 
 const TextareaBoxes = () => {
   return (
@@ -12,6 +13,7 @@ const TextareaBoxes = () => {
       <br />
       <TextBox2 />
       <br />
+      <TextBox2_New />
       <br />
       <TextBox3 />
       <br />

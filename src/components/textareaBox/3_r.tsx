@@ -15,7 +15,10 @@ const TextBox3 = () => {
       cloneElem.value = val;
 
       const lines = Math.min(
-        Math.max(cloneElem.scrollHeight / cloneElem.clientHeight, 3),
+        Math.max(
+          Math.floor(cloneElem.scrollHeight / cloneElem.clientHeight),
+          3
+        ),
         15
       );
       elem.rows = lines;
