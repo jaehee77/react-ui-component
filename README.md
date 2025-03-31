@@ -216,3 +216,128 @@ console.log(userTags);  // Set { 'javascript', 'programming', 'web' }
 <br>
 
 ---
+
+### ✅ classnames/bind 방식
+
+```javascript
+import classNames from 'classnames/bind';
+import styles from './index.module.scss';
+
+const cx = classNames.bind(styles);
+
+const Button = ({ primary }) => {
+  return <button className={cx('button', { primary })}>Click Me</button>;
+};
+```
+
+이렇게 하면 styles.button과 styles.primary가 자동으로 바인딩됨.
+
+<br>
+
+---
+
+### ✅ clsx로 동일하게 구현
+
+```javascript
+import clsx from 'clsx';
+
+const cx = (...args) => clsx(...args.map((arg) => styles[arg] || arg));
+
+const Button = ({ primary }) => {
+  return (
+    <button className={cx('button', primary && 'primary')}>Click Me</button>
+  );
+};
+```
+
+<br>
+
+### ✅ 커스텀 훅으로 만들어서 사용
+
+```javascript
+import clsx from 'clsx';
+
+export const createCx =
+  (styles) =>
+  (...args) =>
+    clsx(...args.map((arg) => styles[arg] || arg));
+
+// 사용 예시
+import styles from './index.module.scss';
+const cx = createCx(styles);
+
+const Button = ({ primary }) => {
+  return (
+    <button className={cx('button', primary && 'primary')}>Click Me</button>
+  );
+};
+```
+
+<br>
+
+---
+
+### ✅ 어떻게 관리하는 것이 좋을까?
+
+#### 1️⃣ 공통 유틸 파일로 분리
+
+컴포넌트마다 `cx`를 정의하는 대신, 공통 유틸 파일을 만들어서 재사용하는 것이 효율적
+
+📌 utils/cx.ts 파일을 만들고 다음과 같이 정의
+
+```javascript
+import clsx from 'clsx';
+
+// CSS Modules 스타일을 매핑하기 위한 함수
+const createCx = (styles: Record<string, string>) => {
+  return (...args: unknown[]) => clsx(...args.map((arg) => styles[arg] || arg));
+};
+
+export default createCx;
+```
+
+<br>
+
+#### 2️⃣ 각 컴포넌트에서 재사용
+
+각 컴포넌트에서 createCx를 사용하면 됨.
+✅ #1 컴포넌트 예제
+
+```tsx
+import styles from './Button.module.scss';
+import createCx from '@/utils/cx';
+
+const cx = createCx(styles);
+
+const Button = ({ primary }: { primary?: boolean }) => {
+  return (
+    <button className={cx('button', primary && 'primary')}>Click Me</button>
+  );
+};
+
+export default Button;
+```
+
+<br>
+
+✅ #2 컴포넌트 예제
+
+```tsx
+import styles from './Card.module.scss';
+import createCx from '@/utils/cx';
+
+const cx = createCx(styles);
+
+const Card = ({ shadow }: { shadow?: boolean }) => {
+  return <div className={cx('card', shadow && 'shadow')}>Card Content</div>;
+};
+
+export default Card;
+```
+
+#### ✅ 이 방식의 장점
+
+✔ 컴포넌트마다 clsx를 매번 새로 만들 필요 없음
+✔ CSS Module 스타일을 쉽게 매핑할 수 있음
+✔ 일반 className과 함께 사용할 수 있음
+✔ 재사용성 증가 → 유지보수가 쉬워짐

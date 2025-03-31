@@ -5,6 +5,7 @@ import TextareaBoxes from './components/textareaBox';
 import LineClamps from './components/lineClamp';
 import LazyLoad1 from './components/lazyLoading/1_r';
 import LazyLoading_Vanilla from './components/lazyLoading/2_v';
+import InfiniteScrollR from './components/infiniteScroll/react';
 
 export const routePaths = [
   '/',
@@ -17,6 +18,7 @@ export const routePaths = [
   '/lazyLoading/1_r',
   '/lazyLoading/2_v',
   '/infiniteScroll',
+  '/infiniteScroll/react',
   '/scrollBox',
   '/scrollSpy',
   '/snackbar',
@@ -120,9 +122,15 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
   },
   '/infiniteScroll': {
     key: '/infiniteScroll',
-    link: '/infiniteScroll',
+    link: '/infiniteScroll/react',
     name: '07. 무한 스크롤',
-    children: null,
+    children: ['/infiniteScroll/react'],
+  },
+  '/infiniteScroll/react': {
+    key: '/infiniteScroll/react',
+    link: '/infiniteScroll/react',
+    name: 'react',
+    children: InfiniteScrollR,
   },
   '/scrollBox': {
     key: '/scrollBox',
