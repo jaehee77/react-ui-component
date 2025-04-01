@@ -37,7 +37,7 @@ export const randomize = ({
 
   const num = Math.random() * (max - min) + min; // min <= num <= max
 
-  return Math.round(num / step) * step;
+  return Math.floor(num / step) * step;
 };
 
 // randomize({min:1, max: 50, step: 1});
